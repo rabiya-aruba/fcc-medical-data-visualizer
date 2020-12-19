@@ -29,6 +29,10 @@ def draw_cat_plot():
     # Show the counts of each feature.
     # You will have to rename one of the collumns for the catplot to work correctly.
 
+    df_cat = pd.DataFrame(df_cat.groupby(["cardio","variable","value"])["value"].count())
+    df_cat.columns=["total"]
+    df_cat.reset_index(inplace=True)
+    
     # Draw the catplot with 'sns.catplot()'
     fig = sns.catplot(data=df_cat, kind="count", x="variable", hue="value", col="cardio")
     fig.set(ylabel="total")
